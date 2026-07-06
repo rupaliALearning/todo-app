@@ -16,7 +16,8 @@ public class TodoRepository : ITodoRepository
     public async Task<IEnumerable<TodoItem>> GetAllAsync()
     {
         return await _context.Todos
-            .OrderByAscending(t => t.DueDate)
+            .OrderBy(t => t.DueDate == null)
+            .ThenBy(t => t.DueDate)
             .ToListAsync();
     }
 
