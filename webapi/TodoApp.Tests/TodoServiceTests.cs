@@ -110,4 +110,24 @@ public class TodoServiceTests
 
         Assert.False(result);
     }
+
+    [Fact]
+    public async Task DeleteAllCompleted_ShouldReturnCount_WhenCompletedTodosExist()
+    {
+        _todoRepository.Setup(r => r.DeleteAllCompletedAsync()).ReturnsAsync(3);
+
+        var result = await _todoService.DeleteAllCompletedAsync();
+
+        Assert.Equal(3, result);
+    }
+
+    [Fact]
+    public async Task DeleteAllCompleted_ShouldReturnZero_WhenNoCompletedTodos()
+    {
+        _todoRepository.Setup(r => r.DeleteAllCompletedAsync()).ReturnsAsync(0);
+
+        var result = await _todoService.DeleteAllCompletedAsync();
+
+        Assert.Equal(0, result);
+    }
 }

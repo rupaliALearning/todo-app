@@ -27,7 +27,11 @@ public class AppDbContext : DbContext
                   .HasDefaultValue(false);
 
             entity.Property(t => t.DueDate)
-                  .IsRequired(false);
+                .IsRequired(false)
+                .HasConversion(
+                    v => v.HasValue ? v.Value.ToDateTime(TimeOnly.MinValue) : (DateTime?)null,
+                    v => v.HasValue ? DateOnly.FromDateTime(v.Value) : (DateOnly?)null
+                );
 
             entity.Property(t => t.CreatedAt)
                   .IsRequired();

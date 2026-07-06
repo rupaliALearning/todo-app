@@ -1,0 +1,21 @@
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+mat-card {
+  padding: 24px;
+}
+
+mat-card-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

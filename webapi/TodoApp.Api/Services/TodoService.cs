@@ -39,4 +39,9 @@ public class TodoService : ITodoService{
         return await _todoRepo.DeleteAsync(id);
     }
 
+    public async Task<int> DeleteAllCompletedAsync()
+    {
+        return await _todoRepo.DeleteAllCompletedAsync();
+    }
+
 }

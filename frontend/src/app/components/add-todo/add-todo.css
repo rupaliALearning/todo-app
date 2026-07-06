@@ -1,0 +1,37 @@
+.add-todo {
+  margin-bottom: 8px;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.title-field {
+  flex: 2;
+  min-width: 200px;
+}
+
+.date-field {
+  flex: 1;
+  min-width: 150px;
+}
+
+.required {
+  color: #ff4444;
+}
+
+.action-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  justify-content: flex-end;
+}
+
+.warn-btn {
+  background-color: var(--mat-sys-error) !important;
+  color: var(--mat-sys-on-error) !important;
+}

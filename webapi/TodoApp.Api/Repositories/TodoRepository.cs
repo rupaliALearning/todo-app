@@ -55,4 +55,15 @@ public class TodoRepository : ITodoRepository
         await _context.SaveChangesAsync();
         return true;
     }
+
+    public async Task<int> DeleteAllCompletedAsync()
+    {
+        var completed = await _context.Todos
+            .Where(t => t.IsCompleted)
+            .ToListAsync();
+
+        _context.Todos.RemoveRange(completed);
+        await _context.SaveChangesAsync();
+        return completed.Count;
+    }
 }

@@ -9,4 +9,5 @@ public interface ITodoService
     Task<TodoItem> AddAsync(CreateTodoDto createDto);
     Task<TodoItem?> UpdateCompletedAsync(Guid id, UpdateCompletedDto dto);
     Task<bool> DeleteAsync(Guid id);
+    Task<int> DeleteAllCompletedAsync();
 }

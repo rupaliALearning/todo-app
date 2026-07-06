@@ -62,4 +62,12 @@ public class TodosController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpDelete("completed")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> DeleteAllCompleted()
+    {
+        var count = await _todoService.DeleteAllCompletedAsync();
+        return Ok(new { deleted = count });
+    }
 }
