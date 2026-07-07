@@ -30,10 +30,10 @@ public class TodosController : ControllerBase
     public async Task<IActionResult> Add([FromBody] CreateTodoDto request)
     {
         if (string.IsNullOrWhiteSpace(request.Title))
-            return BadRequest(new { error = "Title cannot be empty" });
+            return BadRequest(new { error = "Description cannot be empty" });
 
         if (request.Title.Length > 500)
-            return BadRequest(new { error = "Title cannot exceed 500 characters" });
+            return BadRequest(new { error = "Description cannot exceed 500 characters" });
 
         var todo = await _todoService.AddAsync(request);
         return CreatedAtAction(nameof(GetAll), new { id = todo.Id }, todo);

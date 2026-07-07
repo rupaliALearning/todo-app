@@ -12,12 +12,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Keep a persistent SQLite in-memory connection alive
-var keepAliveConnection = new SqliteConnection("Data Source=TodoDb;Mode=Memory;Cache=Shared");
+var keepAliveConnection = new SqliteConnection(builder.Configuration.GetConnectionString("DefaultConnection"));
 keepAliveConnection.Open();
 
 // EF Core with SQLite in-memory
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Data Source=TodoDb;Mode=Memory;Cache=Shared"));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Register repository and service
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();
@@ -51,6 +51,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        context.Response.StatusCode = 500;
+        context.Response.ContentType = "application/json";
+        await context.Response.WriteAsJsonAsync(new
+        {
+            error = "An unexpected error occurred"
+        });
+    });
+});
 
 app.UseHttpsRedirection();
 app.UseCors("AllowAngular");

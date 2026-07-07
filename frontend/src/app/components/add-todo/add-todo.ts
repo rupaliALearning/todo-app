@@ -31,12 +31,12 @@ export class AddTodo {
 
   onAdd(): void {
     if (!this.title().trim()) {
-      this.errorMessage.set('Title is required');
+      this.errorMessage.set('Description is required');
       return;
     }
 
     if (this.title().trim().length > 500) {
-      this.errorMessage.set('Title cannot exceed 500 characters');
+      this.errorMessage.set('Description cannot exceed 500 characters');
       return;
     }
 

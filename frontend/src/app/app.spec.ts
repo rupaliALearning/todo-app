@@ -1,10 +1,27 @@
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { TodoService } from './services/todo.service';
+import { of } from 'rxjs';
+import { vi } from 'vitest';
 
 describe('App', () => {
+  let todoService: Partial<TodoService>;
   beforeEach(async () => {
+    todoService = {
+      getAll: vi.fn().mockReturnValue(of([])),
+      add: vi.fn(),
+      delete: vi.fn(),
+      updateCompleted: vi.fn(),
+      deleteAllCompleted: vi.fn()
+    };
+
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [        
+        provideNativeDateAdapter(),
+        { provide: TodoService, useValue: todoService }
+      ]
     }).compileComponents();
   });
 
@@ -18,6 +35,12 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, frontend');
+    expect(compiled.querySelector('mat-card-title')?.textContent).toContain('TODO List');
+  });
+
+  it('should load todos on init', () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.componentInstance.ngOnInit();
+    expect(todoService.getAll).toHaveBeenCalled();
   });
 });

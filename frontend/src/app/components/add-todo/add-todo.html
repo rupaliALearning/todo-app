@@ -1,4 +1,7 @@
 <div class="add-todo">
+  @if (errorMessage()) {
+    <mat-error>{{ errorMessage() }}</mat-error>
+  }
   <div class="form-row">
     <mat-form-field appearance="outline" class="title-field">
       <mat-label>TODO <span class="required">*</span></mat-label>
@@ -32,7 +35,4 @@
     }
   </div>
 
-  @if (errorMessage()) {
-    <mat-error>{{ errorMessage() }}</mat-error>
-  }
 </div>

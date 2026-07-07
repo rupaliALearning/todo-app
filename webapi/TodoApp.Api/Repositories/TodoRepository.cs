@@ -18,6 +18,7 @@ public class TodoRepository : ITodoRepository
         return await _context.Todos
             .OrderBy(t => t.DueDate == null)
             .ThenBy(t => t.DueDate)
+            .ThenBy(t=> t.Title)
             .ToListAsync();
     }
 

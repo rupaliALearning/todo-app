@@ -31,28 +31,37 @@ export class App implements OnInit {
   loadTodos(): void {
     this.todoService.getAll().subscribe({
       next: (todos) => this.todos.set(todos),
-      error: () => this.showError('Failed to load TODOs')
+      error: () => this.showMessage('Failed to load TODOs')
     });
   }
 
   onTodoAdded(event: { title: string; dueDate: string | null }): void {
     this.todoService.add(event.title, event.dueDate).subscribe({
-      next: () => this.loadTodos(),
-      error: () => this.showError('Failed to add TODO')
+      next: () => {
+        this.loadTodos();
+        this.showMessage('TODO added')
+      },
+      error: () => this.showMessage('Failed to add TODO')
     });
   }
 
   onTodoDeleted(id: string): void {
     this.todoService.delete(id).subscribe({
-      next: () => this.loadTodos(),
-      error: () => this.showError('Failed to delete TODO')
+      next: () => {
+        this.loadTodos();
+        this.showMessage('TODO deleted')
+      },
+      error: () => this.showMessage('Failed to delete TODO')
     });
   }
 
   onUpdateCompleted(event: { id: string; isCompleted: boolean }): void {
     this.todoService.updateCompleted(event.id, event.isCompleted).subscribe({
-      next: () => this.loadTodos(),
-      error: () => this.showError('Failed to update TODO')
+      next: () => {
+        this.loadTodos();
+        this.showMessage('TODO updated')
+      },
+      error: () => this.showMessage('Failed to update TODO')
     });
   }
 
@@ -61,13 +70,13 @@ export class App implements OnInit {
       next: (result) => 
         {
           this.loadTodos();
-          this.snackBar.open(`${result.deleted} TODO(s) deleted`, 'Close', { duration: 3000 });
+          this.showMessage(`${result.deleted} TODO(s) deleted`)
         },
-      error: () => this.showError('Failed to delete completed TODOs')
+      error: () => this.showMessage('Failed to delete completed TODOs')
     });
   }
 
-  private showError(message: string): void {
-    this.snackBar.open(message, 'Close', { duration: 3000 });
+  private showMessage(message: string): void {
+    this.snackBar.open(message, 'Close', { duration: 2000 });
   }
 }

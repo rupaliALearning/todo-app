@@ -17,10 +17,10 @@ public class TodoService : ITodoService{
 
     public async Task<TodoItem> AddAsync(CreateTodoDto createDto){
        if (string.IsNullOrWhiteSpace(createDto.Title))
-            throw new ArgumentException("Title cannot be empty", nameof(createDto.Title));
+            throw new ArgumentException("Description cannot be empty", nameof(createDto.Title));
 
         if (createDto.Title.Length > 500)
-            throw new ArgumentException("Title cannot exceed 500 characters", nameof(createDto.Title)); 
+            throw new ArgumentException("Description cannot exceed 500 characters", nameof(createDto.Title)); 
         var newTodoItem = new TodoItem {Title = createDto.Title, DueDate = createDto.DueDate};
         return await _todoRepo.AddAsync(newTodoItem);
     }
