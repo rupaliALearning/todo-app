@@ -56,7 +56,7 @@ dotnet test TodoApp.Tests/TodoApp.Tests.csproj
 ```bash
 cd frontend
 ng test --watch=false`
-
+```
 
 ## Notes
 
