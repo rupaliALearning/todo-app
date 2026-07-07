@@ -1,5 +1,5 @@
 # TODO App
-A full-stack TODO application built with Angular 22 (frontend) and .NET 10 Web API (backend).
+A full-stack TODO application built with Angular 22 (frontend) and .NET 10 Web API (backend) using Entity Framework Core with SQLite in-memory database.
 
 ## Features
 
@@ -16,6 +16,19 @@ A full-stack TODO application built with Angular 22 (frontend) and .NET 10 Web A
 - .NET 10 SDK
 - Node.js 22+
 - Angular CLI 22
+
+## Tech Stack
+
+**Backend:**
+- .NET 10 Web API
+- Entity Framework Core
+- SQLite in-memory database
+- xUnit unit tests with Moq
+
+**Frontend:**
+- Angular 22
+- Angular Material
+- Vitest unit tests
 
 ## Running the Application
 
